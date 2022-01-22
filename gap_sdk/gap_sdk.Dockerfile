@@ -1,7 +1,6 @@
 FROM ubuntu:20.04
 #FROM gap:base
-SHELL ["/bin/bash", "-c"]
-MAINTAINER csamplawski@cs.umass.edu
+SHELL ["/bin/bash", "-c"] MAINTAINER csamplawski@cs.umass.edu
 
 RUN apt-get update 
 
@@ -68,11 +67,19 @@ RUN touch .tiler_url
 RUN echo "https://greenwaves-technologies.com/autotiler/" >> .tiler_url
 #RUN apt-get -y install libblas3 liblapack3 liblapack-dev libblas-dev
 #RUN apt-get -y install gfortran 
-RUN pip install -r tools/nntool/requirements.txt
+#RUN pip install -r tools/nntool/requirements.txt
 RUN pip install -r requirements.txt
 ENV TILER_LICENSE_AGREED="TILER_LICENSE_AGREED"
 RUN source configs/gapuino_v2.sh && make -j 4 all
 WORKDIR "/root/"
+RUN echo "source /root/gap_sdk/configs/gapuino_v2.sh" >> /root/.bashrc
+
+RUN git clone https://github.com/GreenWaves-Technologies/image_classification_networks.git
+WORKDIR "/root/image_classification_networks/"
+RUN ./models/download_models.sh
+WORKDIR "/root/"
+
+RUN pip install pyserial
 #RUN . gap_sdk/configs/gapuino_v2.sh
 
 #SHELL ["/bin/bash", "-c", "source /gap_sdk/configs/gapuino_v2.sh"]
