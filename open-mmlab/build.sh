@@ -1,1 +1,1 @@
-sudo docker build -t open-mmlab:test -f Dockerfile .
+sudo docker build -t open-mmlab:1.0 -f Dockerfile .
