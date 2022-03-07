@@ -1,1 +1,1 @@
-sudo docker build -t open-mmlab:1.0 -f Dockerfile .
+sudo docker build -t colinski/open-mmlab:1.0 -f Dockerfile .
