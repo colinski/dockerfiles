@@ -42,23 +42,23 @@ RUN pip install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2
 RUN pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu113/torch1.10.0/index.html
 
 #install mmclassification
-WORKDIR /root
+WORKDIR /home
 RUN git clone https://github.com/open-mmlab/mmclassification.git
-WORKDIR /root/mmclassification
+WORKDIR /home/mmclassification
 RUN git checkout 2037260 #version 0.21.0
 RUN pip install .
 
 #install mmdetection
-WORKDIR /root
+WORKDIR /home
 RUN git clone https://github.com/open-mmlab/mmdetection.git
-WORKDIR /root/mmdetection
+WORKDIR /home/mmdetection
 RUN git checkout 52a3276 #version 2.22.0
 RUN pip install .
 
 #install mmtracking
-WORKDIR /root
+WORKDIR /home
 RUN git clone https://github.com/open-mmlab/mmtracking.git
-WORKDIR /root/mmtracking
+WORKDIR /home/mmtracking
 RUN git checkout 3b7acb7 #version 0.11.0
 RUN pip install .
 
