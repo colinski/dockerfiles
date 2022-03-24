@@ -29,40 +29,46 @@ RUN pip install scikit-learn==1.0.2
 RUN pip install ipython==8.1.1
 RUN pip install ipdb==0.13.9
 RUN pip install jupyterlab==3.3.0
+RUN pip install ipywidgets #for jupyterlab
 RUN pip install pycocotools
 RUN pip install terminaltables
+RUN pip install filterpy #Kalman filters
 
 #onnx
 RUN pip install onnx==1.11.0
 RUN pip install onnxruntime==1.10.0
 RUN pip install onnx-simplifier
 
+#tracking stuff
+RUN pip install pyro-ppl
+RUN pip install git+https://github.com/JonathonLuiten/TrackEval.git
+
 #install torch and mmcv
 RUN pip install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 RUN pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu113/torch1.10.0/index.html
 
-#install mmclassification
-WORKDIR /home
-RUN git clone https://github.com/open-mmlab/mmclassification.git
-WORKDIR /home/mmclassification
-RUN git checkout 2037260 #version 0.21.0
-RUN pip install .
+RUN pip install motmetrics
+RUN pip install seaborn
+RUN pip install lap
 
-#install mmdetection
-WORKDIR /home
-RUN git clone https://github.com/open-mmlab/mmdetection.git
-WORKDIR /home/mmdetection
-RUN git checkout 52a3276 #version 2.22.0
-RUN pip install .
+#WORKDIR /home
+#RUN git clone https://github.com/open-mmlab/mmclassification.git
+#WORKDIR /home/mmclassification
+#RUN git checkout 2037260 #version 0.21.0
+#RUN pip install .
 
-#install mmtracking
-WORKDIR /home
-RUN git clone https://github.com/open-mmlab/mmtracking.git
-WORKDIR /home/mmtracking
-RUN git checkout 3b7acb7 #version 0.11.0
-RUN pip install .
+#WORKDIR /home
+#RUN git clone https://github.com/open-mmlab/mmdetection.git
+#WORKDIR /home/mmdetection
+#RUN git checkout 52a3276 #version 2.22.0
+#RUN pip install .
 
-WORKDIR /root
+#WORKDIR /home
+#RUN git clone https://github.com/open-mmlab/mmtracking.git
+#WORKDIR /home/mmtracking
+#RUN git checkout 3b7acb7 #version 0.11.0
+#RUN pip install .
+
 
 #RUN pip install numpy
 #RUN pip install opencv-python
