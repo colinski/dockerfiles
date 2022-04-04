@@ -15,12 +15,10 @@ module load cuda/11.3.1
 export SCRATCH=/scratch/$USER/
 ```
 
-
-As an example, consider the open-mmlab directionary in this repo. 
-It contains the enviroment I've been using lately.
-The environment is built using Docker via the Dockerfile (build.sh). 
+This directory contains the enviroment I've been using lately.
+First, build the image using Docker via the Dockerfile (build.sh). 
 ```
-sudo docker build -t colinski/open-mmlab:1.0 -f Dockerfile .
+sudo docker build -t colinski/python -f Dockerfile .
 ```
 This image sources from an official NVIDIA image which has CUDA==11.3.0 installed in Ubuntu 20.04. 
 Most of the Dockerfile just installs python modules via pip.
@@ -29,12 +27,12 @@ However this step can be a slow and resource instensive process.
 
 I then push it to dockerhub (push.sh).
 ```
-sudo docker push colinski/open-mmlab:1.0
+sudo docker push colinski/python
 ```
 
 Finally pull the image as a Singularity SIF file 
 ```
-singularity pull -F $SCRATCH/sif/open-mmlab:1.0.sif docker://colinski/open-mmlab:1.0
+singularity pull -F $SCRATCH/sif/python.sif docker://colinski/python
 ```
 Note that the resulting SIF file is often large (5+ GB). 
 Furthermore, the downloading process can take up to an hour.
@@ -44,7 +42,7 @@ I am currently more comfortable with Docker and so far everything has worked fin
 
 Running the image looks something like:
 ```
-singularity run --nv $SCRATCH/sif/open-mmlab:1.0.sif python
+singularity run --nv $SCRATCH/sif/python.sif python
 ```
 This will drop you into a python interpreter with the installed packages. 
 Note that the --nv option is necessary for any GPUs to be visible inside the container.
