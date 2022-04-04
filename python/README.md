@@ -63,3 +63,29 @@ git clone https://github.com/colinski/mmtracking.git
 I try to keep them update to with the upstream master branch so that I can use any new models that get added.
 For that reason I try to only add new files and not modify any code from the main library.
 This helps avoid merge conflicts when fetching the upstream.
+
+### Example
+Lets consider training and testing a model on COCO using mmdetection.
+First make sure that the COCO data is stored in the following way:
+```
+├── data
+│   ├── coco
+│   │   ├── annotations
+│   │   ├── train2017
+│   │   ├── val2017
+│   │   ├── test2017
+```
+I personally put data/ in /scratch/$USER/ on Unity as it is much faster than /home/.
+To train and test a model I use dist_train.sh and dist_test.sh found in mmdetection/tools/.
+
+
+I personally put all my code in /scratch/$USER/src on Unity, so to test a model I can run the following:
+```
+singularity run --nv $SCRATCH/sif/python.sif bash \
+  $SCRATCH/src/mmdetection/tools/dist_test.sh \
+  $SCRATCH/src/mmdetection/configs/detr/detr_r50_8x2_150e_coco.py \
+  detr_r50_8x2_150e_coco_20201130_194835-2c4b8974.pth \
+  --eval bbox
+```
+The checkpoint file is downloaded from mmdetection (see configs/detr for link).
+
