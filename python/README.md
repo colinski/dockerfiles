@@ -85,7 +85,16 @@ singularity run --nv $SCRATCH/sif/python.sif bash \
   $SCRATCH/src/mmdetection/tools/dist_test.sh \
   $SCRATCH/src/mmdetection/configs/detr/detr_r50_8x2_150e_coco.py \
   detr_r50_8x2_150e_coco_20201130_194835-2c4b8974.pth \
+  $NUM_GPUS \
   --eval bbox
 ```
 The checkpoint file is downloaded from mmdetection (see configs/detr for link).
-
+NUM_GPUS is the number of GPUs you'd like to use.
+Similarly to train a model:
+```
+singularity run --nv $SCRATCH/sif/python.sif bash \
+  $SCRATCH/src/mmdetection/tools/dist_train.sh \
+  $SCRATCH/src/mmdetection/configs/detr/detr_r50_8x2_150e_coco.py \
+  $NUM_GPUS \
+  --work_dir /path/to/dir
+```
