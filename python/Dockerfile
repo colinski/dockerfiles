@@ -56,3 +56,5 @@ RUN pip install visdom
 RUN pip install sacred
 
 RUN pip install pydub
+RUN pip install bounding-box
+RUN pip install h5py
