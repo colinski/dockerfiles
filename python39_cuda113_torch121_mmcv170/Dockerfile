@@ -3,6 +3,8 @@ SHELL ["/bin/bash", "-c"]
 MAINTAINER csamplawski@cs.umass.edu
 
 #some libs needed for future pkgs
+RUN rm /etc/apt/sources.list.d/cuda.list
+RUN rm /etc/apt/sources.list.d/nvidia-ml.list
 RUN apt-get update 
 RUN DEBIAN_FRONTEND=noninteractive TZ="America/New_York" apt-get -y install tzdata
 RUN apt-get install -y build-essential
@@ -97,3 +99,6 @@ RUN pip install lion-pytorch
 RUN pip install sentencepiece
 
 RUN pip install pydub
+RUN apt-get -y install ffmpeg
+RUN pip install flask
+RUN pip install arm-mango
